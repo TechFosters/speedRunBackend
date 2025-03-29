@@ -1,12 +1,23 @@
 //const express = require('express')
 import express from "express";
 import dotenv from "dotenv"; 
+import cors from "cors";
 
 dotenv.config();
 
 const app = express(); //function call, app ke pass reference
 //const port = 3000; //web server kisi na kisi port pe chlega..65000(approx) //4000, 5000, 5173, 8080, 8000 //{80, 443, 23} <= don't use
 
+app.use(cors({
+  origin: process.env.BASE_URL,
+  credentials: true,
+  methods: ['GET', 'POST', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+})
+);
+
+app.use(express.json());
+app.use(express.urlencoded({extended:true}))
 
 const port = process.env.PORT || 4000;
 
@@ -15,6 +26,8 @@ const port = process.env.PORT || 4000;
 app.get('/', (req, res) => { 
   res.send('Cohort!')
 });
+
+//more routes
 
 app.get("/tech",(req,res)=>{
     res.send('TechFosters!')
