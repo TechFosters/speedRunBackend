@@ -2,6 +2,7 @@
 import express from "express";
 import dotenv from "dotenv"; 
 import cors from "cors";
+import db from "./utils/db.js";
 
 dotenv.config();
 
@@ -46,12 +47,15 @@ app.get("/hello",(req, res)=>{
 app.get('/learn',(req,res)=>{
     res.send('Study!')
 })
+
+//connect to db
+db();
 //below pice of code sabse phle run krega
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
-console.log(process.env)
+console.log(process.env.PORT)
 
 
